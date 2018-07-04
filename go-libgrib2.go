@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
+	"fmt"
 )
 
 func Read(data []byte) error {
@@ -23,12 +24,14 @@ func Read(data []byte) error {
 		}
 
 		sec0 := ReadSection0(data[pos : pos+16])
+		fmt.Printf("Sec0: %+v\n", sec0)
 		pos += 16
 		for i := 0; uint64(i) < sec0.Length; i++ {
 			secN, size, _ := readSectionHeader(data[pos : pos+5])
 			switch secN {
 			case 1:
-				ReadSection1(data[pos : pos+size])
+				sec1 := ReadSection1(data[pos : pos+size])
+				fmt.Printf("Sec1: %+v\n", sec1)
 			case 2:
 				ReadSection2(data[pos : pos+size])
 			case 3:
@@ -58,5 +61,5 @@ func readSectionHeader(data []byte) (int, int, error) {
 	_ = binary.Read(bytes.NewBuffer(data[0:]), binary.BigEndian, &size)
 	_ = binary.Read(bytes.NewBuffer(data[4:]), binary.BigEndian, &sec)
 
-	return int(size), int(sec), nil
+	return int(sec), int(size), nil
 }
