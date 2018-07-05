@@ -26,12 +26,16 @@ func ReadSection4(data []byte) Section4 {
 	switch tn {
 	case uint16(0):
 		tmp = template.ReadTemplate4_0(data[9:])
+	case uint16(1):
+		tmp = template.ReadTemplate4_1(data[9:])
 	case uint16(8):
 		tmp = template.ReadTemplate4_8(data[9:])
+	case uint16(11):
+		tmp = template.ReadTemplate4_11(data[9:])
 	case uint16(0xFFFF):
 		tmp = nil
 	default:
-		log.Fatalf("Not Impliment Template 4.%d", tn)
+		log.Printf("Not Impliment Template 4.%d", tn)
 	}
 
 	return Section4{

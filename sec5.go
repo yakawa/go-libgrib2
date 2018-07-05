@@ -29,7 +29,7 @@ func ReadSection5(data []byte) Section5 {
 	case uint16(0xFFFF):
 		tmp = nil
 	default:
-		log.Fatal("Not Impliment")
+		log.Fatalf("Not Impliment Template 5.%d", tn)
 	}
 
 	return Section5{

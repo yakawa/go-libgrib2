@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"log"
 )
 
 type Grib2 struct {
@@ -51,7 +50,6 @@ func Read(data []byte) ([]Grib2, error) {
 			case 1:
 				sec1 = ReadSection1(data[pos : pos+size])
 			case 2:
-				log.Fatal("Not Impliment")
 				ReadSection2(data[pos : pos+size])
 			case 3:
 				sec3 = ReadSection3(data[pos : pos+size])
@@ -62,7 +60,7 @@ func Read(data []byte) ([]Grib2, error) {
 			case 6:
 				sec6 = ReadSection6(data[pos : pos+size])
 			case 7:
-				sec7 := ReadSection7(data[pos : pos+size])
+				sec7 := ReadSection7(data[pos:pos+size], sec5, sec6)
 				grib2 := Grib2{
 					sec1: sec1,
 					sec2: sec2,
