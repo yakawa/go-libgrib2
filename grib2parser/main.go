@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -20,5 +21,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	libgrib2.Read(data)
+	grib2, err := libgrib2.Read(data)
+	fmt.Printf("%+v\n", grib2)
 }
