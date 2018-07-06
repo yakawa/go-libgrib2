@@ -10,9 +10,9 @@ import (
 )
 
 type Section4 struct {
-	Oct6           common.Grib2NumericalValue
-	TemplateNumber common.Grib2FlagValue
-	Template       interface{}
+	NV                              common.Grib2NumericalValue
+	ProductDefinitionTemplateNumber common.Grib2CodeValue
+	Template                        interface{}
 }
 
 func ReadSection4(data []byte) Section4 {
@@ -39,8 +39,8 @@ func ReadSection4(data []byte) Section4 {
 	}
 
 	return Section4{
-		Oct6:           common.ReadNumericalValue(o6),
-		TemplateNumber: common.ReadFlagValue(tn, 4, 0),
-		Template:       tmp,
+		NV: common.ReadUnsignedNumericalValue(o6),
+		ProductDefinitionTemplateNumber: common.ReadCodeValue(tn),
+		Template:                        tmp,
 	}
 }

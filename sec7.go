@@ -1,6 +1,7 @@
 package libgrib2
 
 import (
+	"fmt"
 	"log"
 	"math"
 
@@ -9,26 +10,32 @@ import (
 )
 
 type Section7 struct {
-	data []interface{}
+	Data []interface{}
 }
 
 func ReadSection7(data []byte, sec5 Section5, sec6 Section6) Section7 {
 	var val []interface{}
-	switch sec5.TemplateNumber.Val {
+	size := sec5.NumberOfValues.Val
+	switch sec5.DataRepresentationTemplateNumber.Val {
 	case 0:
-		size := sec5.Oct6.Val
-		R := sec5.Template.(template.Template5_0).Oct12
+		R := sec5.Template.(template.Template5_0).ReferenceValue
+		E := sec5.Template.(template.Template5_0).BinaryScaleFactor.Val
+		D := sec5.Template.(template.Template5_0).DecimalScaleFactor.Val
+		nBits := sec5.Template.(template.Template5_0).BitsPerValue.Val
+		val = decodeSimplePack(data[5:], size, R, E, D, nBits)
+	case 3:
+		/* R := sec5.Template.(template.Template5_0).Oct12
 		E := sec5.Template.(template.Template5_0).Oct16.Val
 		D := sec5.Template.(template.Template5_0).Oct18.Val
-		nBits := sec5.Template.(template.Template5_0).Oct20.Val
-		//dataType := sec5.Template.(template.Template5_0).Oct21.Val
-		val = decodeSimplePack(data[5:], size, R, E, D, nBits)
+		nBits := sec5.Template.(template.Template5_0).Oct20.Val */
+		fmt.Printf("Sec5: %+v\n", sec5)
+		fmt.Printf("Sec6: %+v\n", sec6)
 	default:
-		log.Fatalf("Cannot Decode Template 5.%d", sec5.TemplateNumber.Val)
+		log.Fatalf("Cannot Decode Template 5.%d", sec5.DataRepresentationTemplateNumber.Val)
 	}
 
 	return Section7{
-		data: val,
+		Data: val,
 	}
 }
 

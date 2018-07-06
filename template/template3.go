@@ -8,25 +8,25 @@ import (
 )
 
 type Template3_0 struct {
-	Oct15 common.Grib2FlagValue
-	Oct16 common.Grib2NumericalValue
-	Oct17 common.Grib2NumericalValue
-	Oct21 common.Grib2NumericalValue
-	Oct22 common.Grib2NumericalValue
-	Oct26 common.Grib2NumericalValue
-	Oct27 common.Grib2NumericalValue
-	Oct31 common.Grib2NumericalValue
-	Oct35 common.Grib2NumericalValue
-	Oct39 common.Grib2NumericalValue
-	Oct43 common.Grib2NumericalValue
-	Oct47 common.Grib2NumericalValue
-	Oct51 common.Grib2NumericalValue
-	Oct55 common.Grib2FlagValue
-	Oct56 common.Grib2NumericalValue
-	Oct60 common.Grib2NumericalValue
-	Oct64 common.Grib2NumericalValue
-	Oct68 common.Grib2NumericalValue
-	Oct72 common.Grib2FlagValue
+	ShapeOfTheEarth                        common.Grib2CodeValue
+	ScaleFactorOfRadiusOfSphericalEarth    common.Grib2NumericalValue
+	ScaledValuedOfRadiusOfSphericalEarth   common.Grib2NumericalValue
+	ScaleFactorOfEarthMajorAxis            common.Grib2NumericalValue
+	ScaledValueOfEarthMajorAxis            common.Grib2NumericalValue
+	ScaleFactorOfEarthMinorAxis            common.Grib2NumericalValue
+	ScaledValueOfEarthMinorAxis            common.Grib2NumericalValue
+	Ni                                     common.Grib2NumericalValue
+	Nj                                     common.Grib2NumericalValue
+	BasicAngleOfTheInitialProductionDomain common.Grib2NumericalValue
+	SubdivisionsOfBasicAngle               common.Grib2NumericalValue
+	LatitudeOfFirstGridPoint               common.Grib2NumericalValue
+	LongitudeOfFirstGridPoint              common.Grib2NumericalValue
+	ResolutionAndComponentFlags            common.Grib2FlagValue
+	LatitudeOfLastGridPoint                common.Grib2NumericalValue
+	LongitudeOfLastGridPoint               common.Grib2NumericalValue
+	IDirectionIncrement                    common.Grib2NumericalValue
+	JDirectionIncrement                    common.Grib2NumericalValue
+	ScanningMode                           common.Grib2FlagValue
 }
 
 func ReadTemplate3_0(data []byte) Template3_0 {
@@ -62,25 +62,25 @@ func ReadTemplate3_0(data []byte) Template3_0 {
 	_ = binary.Read(bytes.NewBuffer(data[57:]), binary.BigEndian, &o72)
 
 	return Template3_0{
-		Oct15: common.ReadFlagValue(o15, 3, 2),
-		Oct16: common.ReadNumericalValue(o16),
-		Oct17: common.ReadNumericalValue(o17),
-		Oct21: common.ReadNumericalValue(o21),
-		Oct22: common.ReadNumericalValue(o22),
-		Oct26: common.ReadNumericalValue(o26),
-		Oct27: common.ReadNumericalValue(o27),
-		Oct31: common.ReadNumericalValue(o31),
-		Oct35: common.ReadNumericalValue(o35),
-		Oct39: common.ReadNumericalValue(o39),
-		Oct43: common.ReadNumericalValue(o43),
-		Oct47: common.ReadNumericalValue(o47),
-		Oct51: common.ReadNumericalValue(o51),
-		Oct55: common.ReadFlagValue(o55, 3, 3),
-		Oct56: common.ReadNumericalValue(o56),
-		Oct60: common.ReadNumericalValue(o60),
-		Oct64: common.ReadNumericalValue(o64),
-		Oct68: common.ReadNumericalValue(o68),
-		Oct72: common.ReadFlagValue(o72, 3, 4),
+		ShapeOfTheEarth:                      common.ReadCodeValue(o15),
+		ScaleFactorOfRadiusOfSphericalEarth:  common.ReadUnsignedNumericalValue(o16),
+		ScaledValuedOfRadiusOfSphericalEarth: common.ReadUnsignedNumericalValue(o17),
+		ScaleFactorOfEarthMajorAxis:          common.ReadUnsignedNumericalValue(o21),
+		ScaledValueOfEarthMajorAxis:          common.ReadUnsignedNumericalValue(o22),
+		ScaleFactorOfEarthMinorAxis:          common.ReadUnsignedNumericalValue(o26),
+		ScaledValueOfEarthMinorAxis:          common.ReadUnsignedNumericalValue(o27),
+		Ni: common.ReadUnsignedNumericalValue(o31),
+		Nj: common.ReadUnsignedNumericalValue(o35),
+		BasicAngleOfTheInitialProductionDomain: common.ReadUnsignedNumericalValue(o39),
+		SubdivisionsOfBasicAngle:               common.ReadUnsignedNumericalValue(o43),
+		LatitudeOfFirstGridPoint:               common.ReadSignedNumericalValue(o47),
+		LongitudeOfFirstGridPoint:              common.ReadSignedNumericalValue(o51),
+		ResolutionAndComponentFlags:            common.ReadFlagValue(o55),
+		LatitudeOfLastGridPoint:                common.ReadSignedNumericalValue(o56),
+		LongitudeOfLastGridPoint:               common.ReadSignedNumericalValue(o60),
+		IDirectionIncrement:                    common.ReadUnsignedNumericalValue(o64),
+		JDirectionIncrement:                    common.ReadUnsignedNumericalValue(o68),
+		ScanningMode:                           common.ReadFlagValue(o72),
 	}
 
 }

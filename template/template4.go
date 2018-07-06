@@ -9,21 +9,21 @@ import (
 )
 
 type Template4_0 struct {
-	Oct10 common.Grib2FlagValue
-	Oct11 common.Grib2FlagValue
-	Oct12 common.Grib2FlagValue
-	Oct13 common.Grib2FlagValue
-	Oct14 common.Grib2FlagValue
-	Oct15 common.Grib2NumericalValue
-	Oct17 common.Grib2NumericalValue
-	Oct18 common.Grib2FlagValue
-	Oct19 common.Grib2NumericalValue
-	Oct23 common.Grib2FlagValue
-	Oct24 common.Grib2NumericalValue
-	Oct25 common.Grib2NumericalValue
-	Oct29 common.Grib2FlagValue
-	Oct30 common.Grib2NumericalValue
-	Oct31 common.Grib2NumericalValue
+	ParameterCategory               common.Grib2CodeValue
+	ParameterNumber                 common.Grib2CodeValue
+	TypeOfGeneratingProcess         common.Grib2CodeValue
+	BackgroundProcess               common.Grib2NumericalValue
+	GeneratingProcessIdentifier     common.Grib2NumericalValue
+	HoursAfterDataCutoff            common.Grib2NumericalValue
+	MinutesAfterDataCutoff          common.Grib2NumericalValue
+	IndicatorOfUnitOfTimeRange      common.Grib2CodeValue
+	ForecastTime                    common.Grib2NumericalValue
+	TypeOfFirstFixedSurface         common.Grib2CodeValue
+	ScaleFactorOfFirstFixedSurface  common.Grib2NumericalValue
+	ScaledValueOfFirstFixedSurface  common.Grib2NumericalValue
+	TypeOfSecondFixedSurface        common.Grib2CodeValue
+	ScaleFactorOfSecondFixedSurface common.Grib2NumericalValue
+	ScaledValueOfSecondFixedSurface common.Grib2NumericalValue
 }
 
 func ReadTemplate4_0(data []byte) Template4_0 {
@@ -54,44 +54,44 @@ func ReadTemplate4_0(data []byte) Template4_0 {
 	_ = binary.Read(bytes.NewBuffer(data[21:]), binary.BigEndian, &o31)
 
 	return Template4_0{
-		Oct10: common.ReadFlagValue(o10, 4, 1),
-		Oct11: common.ReadFlagValue(o11, 4, 2),
-		Oct12: common.ReadFlagValue(o12, 4, 3),
-		Oct13: common.ReadFlagValue(o13, 99, 0),
-		Oct14: common.ReadFlagValue(o14, 99, 0),
-		Oct15: common.ReadNumericalValue(o15),
-		Oct17: common.ReadNumericalValue(o17),
-		Oct18: common.ReadFlagValue(o18, 4, 4),
-		Oct19: common.ReadNumericalValue(o19),
-		Oct23: common.ReadFlagValue(o23, 4, 5),
-		Oct24: common.ReadNumericalValue(o24),
-		Oct25: common.ReadNumericalValue(o25),
-		Oct29: common.ReadFlagValue(o29, 4, 5),
-		Oct30: common.ReadNumericalValue(o30),
-		Oct31: common.ReadNumericalValue(o31),
+		ParameterCategory:               common.ReadCodeValue(o10),
+		ParameterNumber:                 common.ReadCodeValue(o11),
+		TypeOfGeneratingProcess:         common.ReadCodeValue(o12),
+		BackgroundProcess:               common.ReadUnsignedNumericalValue(o13),
+		GeneratingProcessIdentifier:     common.ReadUnsignedNumericalValue(o14),
+		HoursAfterDataCutoff:            common.ReadUnsignedNumericalValue(o15),
+		MinutesAfterDataCutoff:          common.ReadUnsignedNumericalValue(o17),
+		IndicatorOfUnitOfTimeRange:      common.ReadCodeValue(o18),
+		ForecastTime:                    common.ReadSignedNumericalValue(o19),
+		TypeOfFirstFixedSurface:         common.ReadCodeValue(o23),
+		ScaleFactorOfFirstFixedSurface:  common.ReadSignedNumericalValue(o24),
+		ScaledValueOfFirstFixedSurface:  common.ReadUnsignedNumericalValue(o25),
+		TypeOfSecondFixedSurface:        common.ReadCodeValue(o29),
+		ScaleFactorOfSecondFixedSurface: common.ReadSignedNumericalValue(o30),
+		ScaledValueOfSecondFixedSurface: common.ReadUnsignedNumericalValue(o31),
 	}
 
 }
 
 type Template4_1 struct {
-	Oct10 common.Grib2FlagValue
-	Oct11 common.Grib2FlagValue
-	Oct12 common.Grib2FlagValue
-	Oct13 common.Grib2FlagValue
-	Oct14 common.Grib2FlagValue
-	Oct15 common.Grib2NumericalValue
-	Oct17 common.Grib2NumericalValue
-	Oct18 common.Grib2FlagValue
-	Oct19 common.Grib2NumericalValue
-	Oct23 common.Grib2FlagValue
-	Oct24 common.Grib2NumericalValue
-	Oct25 common.Grib2NumericalValue
-	Oct29 common.Grib2FlagValue
-	Oct30 common.Grib2NumericalValue
-	Oct31 common.Grib2NumericalValue
-	Oct35 common.Grib2FlagValue
-	Oct36 common.Grib2NumericalValue
-	Oct37 common.Grib2NumericalValue
+	ParameterCategory               common.Grib2CodeValue
+	ParameterNumber                 common.Grib2CodeValue
+	TypeOfGeneratingProcess         common.Grib2CodeValue
+	BackgroundProcess               common.Grib2NumericalValue
+	GeneratingProcessIdentifier     common.Grib2NumericalValue
+	HoursAfterDataCutoff            common.Grib2NumericalValue
+	MinutesAfterDataCutoff          common.Grib2NumericalValue
+	IndicatorOfUnitOfTimeRange      common.Grib2CodeValue
+	ForecastTime                    common.Grib2NumericalValue
+	TypeOfFirstFixedSurface         common.Grib2CodeValue
+	ScaleFactorOfFirstFixedSurface  common.Grib2NumericalValue
+	ScaledValueOfFirstFixedSurface  common.Grib2NumericalValue
+	TypeOfSecondFixedSurface        common.Grib2CodeValue
+	ScaleFactorOfSecondFixedSurface common.Grib2NumericalValue
+	ScaledValueOfSecondFixedSurface common.Grib2NumericalValue
+	TypeOfEnsembleForecast          common.Grib2CodeValue
+	PerturbationNumber              common.Grib2NumericalValue
+	NumberOfForecastsInEnsemble     common.Grib2NumericalValue
 }
 
 func ReadTemplate4_1(data []byte) Template4_1 {
@@ -126,53 +126,53 @@ func ReadTemplate4_1(data []byte) Template4_1 {
 	_ = binary.Read(bytes.NewBuffer(data[27:]), binary.BigEndian, &o37)
 
 	return Template4_1{
-		Oct10: common.ReadFlagValue(o10, 4, 1),
-		Oct11: common.ReadFlagValue(o11, 4, 2),
-		Oct12: common.ReadFlagValue(o12, 4, 3),
-		Oct13: common.ReadFlagValue(o13, 99, 0),
-		Oct14: common.ReadFlagValue(o14, 99, 0),
-		Oct15: common.ReadNumericalValue(o15),
-		Oct17: common.ReadNumericalValue(o17),
-		Oct18: common.ReadFlagValue(o18, 4, 4),
-		Oct19: common.ReadNumericalValue(o19),
-		Oct23: common.ReadFlagValue(o23, 4, 5),
-		Oct24: common.ReadNumericalValue(o24),
-		Oct25: common.ReadNumericalValue(o25),
-		Oct29: common.ReadFlagValue(o29, 4, 5),
-		Oct30: common.ReadNumericalValue(o30),
-		Oct31: common.ReadNumericalValue(o31),
-		Oct35: common.ReadFlagValue(o35, 4, 6),
-		Oct36: common.ReadNumericalValue(o36),
-		Oct37: common.ReadNumericalValue(o37),
+		ParameterCategory:               common.ReadCodeValue(o10),
+		ParameterNumber:                 common.ReadCodeValue(o11),
+		TypeOfGeneratingProcess:         common.ReadCodeValue(o12),
+		BackgroundProcess:               common.ReadUnsignedNumericalValue(o13),
+		GeneratingProcessIdentifier:     common.ReadUnsignedNumericalValue(o14),
+		HoursAfterDataCutoff:            common.ReadUnsignedNumericalValue(o15),
+		MinutesAfterDataCutoff:          common.ReadUnsignedNumericalValue(o17),
+		IndicatorOfUnitOfTimeRange:      common.ReadCodeValue(o18),
+		ForecastTime:                    common.ReadSignedNumericalValue(o19),
+		TypeOfFirstFixedSurface:         common.ReadCodeValue(o23),
+		ScaleFactorOfFirstFixedSurface:  common.ReadSignedNumericalValue(o24),
+		ScaledValueOfFirstFixedSurface:  common.ReadUnsignedNumericalValue(o25),
+		TypeOfSecondFixedSurface:        common.ReadCodeValue(o29),
+		ScaleFactorOfSecondFixedSurface: common.ReadSignedNumericalValue(o30),
+		ScaledValueOfSecondFixedSurface: common.ReadUnsignedNumericalValue(o31),
+		TypeOfEnsembleForecast:          common.ReadCodeValue(o35),
+		PerturbationNumber:              common.ReadUnsignedNumericalValue(o36),
+		NumberOfForecastsInEnsemble:     common.ReadUnsignedNumericalValue(o37),
 	}
 
 }
 
 type Template4_8 struct {
-	Oct10 common.Grib2FlagValue
-	Oct11 common.Grib2FlagValue
-	Oct12 common.Grib2FlagValue
-	Oct13 common.Grib2FlagValue
-	Oct14 common.Grib2FlagValue
-	Oct15 common.Grib2NumericalValue
-	Oct17 common.Grib2NumericalValue
-	Oct18 common.Grib2FlagValue
-	Oct19 common.Grib2NumericalValue
-	Oct23 common.Grib2FlagValue
-	Oct24 common.Grib2NumericalValue
-	Oct25 common.Grib2NumericalValue
-	Oct29 common.Grib2FlagValue
-	Oct30 common.Grib2NumericalValue
-	Oct31 common.Grib2NumericalValue
-	Oct35 time.Time
-	Oct42 common.Grib2NumericalValue
-	Oct43 common.Grib2NumericalValue
-	Oct47 common.Grib2FlagValue
-	Oct48 common.Grib2FlagValue
-	Oct49 common.Grib2FlagValue
-	Oct50 common.Grib2NumericalValue
-	Oct54 common.Grib2FlagValue
-	Oct55 common.Grib2NumericalValue
+	ParameterCategory                   common.Grib2CodeValue
+	ParameterNumber                     common.Grib2CodeValue
+	TypeOfGeneratingProcess             common.Grib2CodeValue
+	BackgroundProcess                   common.Grib2NumericalValue
+	GeneratingProcessIdentifier         common.Grib2NumericalValue
+	HoursAfterDataCutoff                common.Grib2NumericalValue
+	MinutesAfterDataCutoff              common.Grib2NumericalValue
+	IndicatorOfUnitOfTimeRange          common.Grib2CodeValue
+	ForecastTime                        common.Grib2NumericalValue
+	TypeOfFirstFixedSurface             common.Grib2CodeValue
+	ScaleFactorOfFirstFixedSurface      common.Grib2NumericalValue
+	ScaledValueOfFirstFixedSurface      common.Grib2NumericalValue
+	TypeOfSecondFixedSurface            common.Grib2CodeValue
+	ScaleFactorOfSecondFixedSurface     common.Grib2NumericalValue
+	ScaledValueOfSecondFixedSurface     common.Grib2NumericalValue
+	EndOfOverallTimeInterval            time.Time
+	NumberOfTimeRange                   common.Grib2NumericalValue
+	NumberOfMissingInStatisticalProcess common.Grib2NumericalValue
+	TypeOfStatisticalProcessing         common.Grib2CodeValue
+	TypeOfTimeIncrement                 common.Grib2CodeValue
+	IndicatorOfUnitForTimeRange         common.Grib2CodeValue
+	LengthOfTimeRange                   common.Grib2NumericalValue
+	IndicatorOfUnitForTimeIncrement     common.Grib2CodeValue
+	TimeIncrement                       common.Grib2NumericalValue
 }
 
 func ReadTemplate4_8(data []byte) Template4_8 {
@@ -227,62 +227,62 @@ func ReadTemplate4_8(data []byte) Template4_8 {
 	loc, _ := time.LoadLocation("UTC")
 
 	return Template4_8{
-		Oct10: common.ReadFlagValue(o10, 4, 1),
-		Oct11: common.ReadFlagValue(o11, 4, 2),
-		Oct12: common.ReadFlagValue(o12, 4, 3),
-		Oct13: common.ReadFlagValue(o13, 99, 0),
-		Oct14: common.ReadFlagValue(o14, 99, 0),
-		Oct15: common.ReadNumericalValue(o15),
-		Oct17: common.ReadNumericalValue(o17),
-		Oct18: common.ReadFlagValue(o18, 4, 4),
-		Oct19: common.ReadNumericalValue(o19),
-		Oct23: common.ReadFlagValue(o23, 4, 5),
-		Oct24: common.ReadNumericalValue(o24),
-		Oct25: common.ReadNumericalValue(o25),
-		Oct29: common.ReadFlagValue(o29, 4, 5),
-		Oct30: common.ReadNumericalValue(o30),
-		Oct31: common.ReadNumericalValue(o31),
-		Oct35: time.Date(int(year), time.Month(int(month)), int(day), int(hour), int(minutes), int(seconds), 0, loc),
-		Oct42: common.ReadNumericalValue(o42),
-		Oct43: common.ReadNumericalValue(o43),
-		Oct47: common.ReadFlagValue(o47, 4, 10),
-		Oct48: common.ReadFlagValue(o48, 4, 11),
-		Oct49: common.ReadFlagValue(o49, 4, 4),
-		Oct50: common.ReadNumericalValue(o50),
-		Oct54: common.ReadFlagValue(o54, 4, 4),
-		Oct55: common.ReadNumericalValue(o55),
+		ParameterCategory:                   common.ReadCodeValue(o10),
+		ParameterNumber:                     common.ReadCodeValue(o11),
+		TypeOfGeneratingProcess:             common.ReadCodeValue(o12),
+		BackgroundProcess:                   common.ReadUnsignedNumericalValue(o13),
+		GeneratingProcessIdentifier:         common.ReadUnsignedNumericalValue(o14),
+		HoursAfterDataCutoff:                common.ReadUnsignedNumericalValue(o15),
+		MinutesAfterDataCutoff:              common.ReadUnsignedNumericalValue(o17),
+		IndicatorOfUnitOfTimeRange:          common.ReadCodeValue(o18),
+		ForecastTime:                        common.ReadSignedNumericalValue(o19),
+		TypeOfFirstFixedSurface:             common.ReadCodeValue(o23),
+		ScaleFactorOfFirstFixedSurface:      common.ReadSignedNumericalValue(o24),
+		ScaledValueOfFirstFixedSurface:      common.ReadUnsignedNumericalValue(o25),
+		TypeOfSecondFixedSurface:            common.ReadCodeValue(o29),
+		ScaleFactorOfSecondFixedSurface:     common.ReadSignedNumericalValue(o30),
+		ScaledValueOfSecondFixedSurface:     common.ReadUnsignedNumericalValue(o31),
+		EndOfOverallTimeInterval:            time.Date(int(year), time.Month(int(month)), int(day), int(hour), int(minutes), int(seconds), 0, loc),
+		NumberOfTimeRange:                   common.ReadUnsignedNumericalValue(o42),
+		NumberOfMissingInStatisticalProcess: common.ReadUnsignedNumericalValue(o43),
+		TypeOfStatisticalProcessing:         common.ReadCodeValue(o47),
+		TypeOfTimeIncrement:                 common.ReadCodeValue(o48),
+		IndicatorOfUnitForTimeRange:         common.ReadCodeValue(o49),
+		LengthOfTimeRange:                   common.ReadUnsignedNumericalValue(o50),
+		IndicatorOfUnitForTimeIncrement:     common.ReadCodeValue(o54),
+		TimeIncrement:                       common.ReadUnsignedNumericalValue(o55),
 	}
 
 }
 
 type Template4_11 struct {
-	Oct10 common.Grib2FlagValue
-	Oct11 common.Grib2FlagValue
-	Oct12 common.Grib2FlagValue
-	Oct13 common.Grib2FlagValue
-	Oct14 common.Grib2FlagValue
-	Oct15 common.Grib2NumericalValue
-	Oct17 common.Grib2NumericalValue
-	Oct18 common.Grib2FlagValue
-	Oct19 common.Grib2NumericalValue
-	Oct23 common.Grib2FlagValue
-	Oct24 common.Grib2NumericalValue
-	Oct25 common.Grib2NumericalValue
-	Oct29 common.Grib2FlagValue
-	Oct30 common.Grib2NumericalValue
-	Oct31 common.Grib2NumericalValue
-	Oct35 common.Grib2FlagValue
-	Oct36 common.Grib2NumericalValue
-	Oct37 common.Grib2NumericalValue
-	Oct38 time.Time
-	Oct45 common.Grib2NumericalValue
-	Oct46 common.Grib2NumericalValue
-	Oct50 common.Grib2FlagValue
-	Oct51 common.Grib2FlagValue
-	Oct52 common.Grib2FlagValue
-	Oct53 common.Grib2NumericalValue
-	Oct57 common.Grib2FlagValue
-	Oct58 common.Grib2NumericalValue
+	ParameterCategory                   common.Grib2CodeValue
+	ParameterNumber                     common.Grib2CodeValue
+	TypeOfGeneratingProcess             common.Grib2CodeValue
+	BackgroundProcess                   common.Grib2NumericalValue
+	GeneratingProcessIdentifier         common.Grib2NumericalValue
+	HoursAfterDataCutoff                common.Grib2NumericalValue
+	MinutesAfterDataCutoff              common.Grib2NumericalValue
+	IndicatorOfUnitOfTimeRange          common.Grib2CodeValue
+	ForecastTime                        common.Grib2NumericalValue
+	TypeOfFirstFixedSurface             common.Grib2CodeValue
+	ScaleFactorOfFirstFixedSurface      common.Grib2NumericalValue
+	ScaledValueOfFirstFixedSurface      common.Grib2NumericalValue
+	TypeOfSecondFixedSurface            common.Grib2CodeValue
+	ScaleFactorOfSecondFixedSurface     common.Grib2NumericalValue
+	ScaledValueOfSecondFixedSurface     common.Grib2NumericalValue
+	TypeOfEnsembleForecast              common.Grib2CodeValue
+	PerturbationNumber                  common.Grib2NumericalValue
+	NumberOfForecastsInEnsemble         common.Grib2NumericalValue
+	EndOfOverallTimeInterval            time.Time
+	NumberOfTimeRange                   common.Grib2NumericalValue
+	NumberOfMissingInStatisticalProcess common.Grib2NumericalValue
+	TypeOfStatisticalProcessing         common.Grib2CodeValue
+	TypeOfTimeIncrement                 common.Grib2CodeValue
+	IndicatorOfUnitForTimeRange         common.Grib2CodeValue
+	LengthOfTimeRange                   common.Grib2NumericalValue
+	IndicatorOfUnitForTimeIncrement     common.Grib2CodeValue
+	TimeIncrement                       common.Grib2NumericalValue
 }
 
 func ReadTemplate4_11(data []byte) Template4_11 {
@@ -341,33 +341,33 @@ func ReadTemplate4_11(data []byte) Template4_11 {
 	loc, _ := time.LoadLocation("UTC")
 
 	return Template4_11{
-		Oct10: common.ReadFlagValue(o10, 4, 1),
-		Oct11: common.ReadFlagValue(o11, 4, 2),
-		Oct12: common.ReadFlagValue(o12, 4, 3),
-		Oct13: common.ReadFlagValue(o13, 99, 0),
-		Oct14: common.ReadFlagValue(o14, 99, 0),
-		Oct15: common.ReadNumericalValue(o15),
-		Oct17: common.ReadNumericalValue(o17),
-		Oct18: common.ReadFlagValue(o18, 4, 4),
-		Oct19: common.ReadNumericalValue(o19),
-		Oct23: common.ReadFlagValue(o23, 4, 5),
-		Oct24: common.ReadNumericalValue(o24),
-		Oct25: common.ReadNumericalValue(o25),
-		Oct29: common.ReadFlagValue(o29, 4, 5),
-		Oct30: common.ReadNumericalValue(o30),
-		Oct31: common.ReadNumericalValue(o31),
-		Oct35: common.ReadFlagValue(o35, 4, 6),
-		Oct36: common.ReadNumericalValue(o36),
-		Oct37: common.ReadNumericalValue(o37),
-		Oct38: time.Date(int(year), time.Month(int(month)), int(day), int(hour), int(minutes), int(seconds), 0, loc),
-		Oct45: common.ReadNumericalValue(o45),
-		Oct46: common.ReadNumericalValue(o46),
-		Oct50: common.ReadFlagValue(o50, 4, 10),
-		Oct51: common.ReadFlagValue(o51, 4, 11),
-		Oct52: common.ReadFlagValue(o52, 4, 4),
-		Oct53: common.ReadNumericalValue(o53),
-		Oct57: common.ReadFlagValue(o57, 4, 4),
-		Oct58: common.ReadNumericalValue(o58),
+		ParameterCategory:                   common.ReadCodeValue(o10),
+		ParameterNumber:                     common.ReadCodeValue(o11),
+		TypeOfGeneratingProcess:             common.ReadCodeValue(o12),
+		BackgroundProcess:                   common.ReadUnsignedNumericalValue(o13),
+		GeneratingProcessIdentifier:         common.ReadUnsignedNumericalValue(o14),
+		HoursAfterDataCutoff:                common.ReadUnsignedNumericalValue(o15),
+		MinutesAfterDataCutoff:              common.ReadUnsignedNumericalValue(o17),
+		IndicatorOfUnitOfTimeRange:          common.ReadCodeValue(o18),
+		ForecastTime:                        common.ReadSignedNumericalValue(o19),
+		TypeOfFirstFixedSurface:             common.ReadCodeValue(o23),
+		ScaleFactorOfFirstFixedSurface:      common.ReadSignedNumericalValue(o24),
+		ScaledValueOfFirstFixedSurface:      common.ReadUnsignedNumericalValue(o25),
+		TypeOfSecondFixedSurface:            common.ReadCodeValue(o29),
+		ScaleFactorOfSecondFixedSurface:     common.ReadSignedNumericalValue(o30),
+		ScaledValueOfSecondFixedSurface:     common.ReadUnsignedNumericalValue(o31),
+		TypeOfEnsembleForecast:              common.ReadCodeValue(o35),
+		PerturbationNumber:                  common.ReadUnsignedNumericalValue(o36),
+		NumberOfForecastsInEnsemble:         common.ReadUnsignedNumericalValue(o37),
+		EndOfOverallTimeInterval:            time.Date(int(year), time.Month(int(month)), int(day), int(hour), int(minutes), int(seconds), 0, loc),
+		NumberOfTimeRange:                   common.ReadUnsignedNumericalValue(o45),
+		NumberOfMissingInStatisticalProcess: common.ReadUnsignedNumericalValue(o46),
+		TypeOfStatisticalProcessing:         common.ReadCodeValue(o50),
+		TypeOfTimeIncrement:                 common.ReadCodeValue(o51),
+		IndicatorOfUnitForTimeRange:         common.ReadCodeValue(o52),
+		LengthOfTimeRange:                   common.ReadUnsignedNumericalValue(o53),
+		IndicatorOfUnitForTimeIncrement:     common.ReadCodeValue(o57),
+		TimeIncrement:                       common.ReadUnsignedNumericalValue(o58),
 	}
 
 }

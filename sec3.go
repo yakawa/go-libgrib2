@@ -10,12 +10,12 @@ import (
 )
 
 type Section3 struct {
-	Oct6           common.Grib2FlagValue
-	Oct7           common.Grib2NumericalValue
-	Oct11          common.Grib2NumericalValue
-	Oct12          common.Grib2FlagValue
-	TemplateNumber common.Grib2FlagValue
-	Template       interface{}
+	SourceOfGridDefinition          common.Grib2CodeValue
+	NumberOfDataPoints              common.Grib2NumericalValue
+	NumberOfOctetsForNumberOfPoints common.Grib2NumericalValue
+	InterpretationOfNumberOfPoints  common.Grib2CodeValue
+	GridDefinitionTemplateNumber    common.Grib2CodeValue
+	Template                        interface{}
 }
 
 func ReadSection3(data []byte) Section3 {
@@ -37,15 +37,15 @@ func ReadSection3(data []byte) Section3 {
 	case uint16(0xFFFF):
 		tmp = nil
 	default:
-		log.Fatalf("Not Impliment Template 3.%d", tn)
+		log.Printf("Not Impliment Template 3.%d", tn)
 	}
 
 	return Section3{
-		Oct6:           common.ReadFlagValue(o6, 3, 0),
-		Oct7:           common.ReadNumericalValue(o7),
-		Oct11:          common.ReadNumericalValue(o11),
-		Oct12:          common.ReadFlagValue(o12, 3, 11),
-		TemplateNumber: common.ReadFlagValue(tn, 3, 1),
-		Template:       tmp,
+		SourceOfGridDefinition:          common.ReadCodeValue(o6),
+		NumberOfDataPoints:              common.ReadUnsignedNumericalValue(o7),
+		NumberOfOctetsForNumberOfPoints: common.ReadUnsignedNumericalValue(o11),
+		InterpretationOfNumberOfPoints:  common.ReadCodeValue(o12),
+		GridDefinitionTemplateNumber:    common.ReadCodeValue(tn),
+		Template:                        tmp,
 	}
 }

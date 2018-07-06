@@ -8,11 +8,11 @@ import (
 )
 
 type Template5_0 struct {
-	Oct12 float32
-	Oct16 common.Grib2NumericalValue
-	Oct18 common.Grib2NumericalValue
-	Oct20 common.Grib2NumericalValue
-	Oct21 common.Grib2FlagValue
+	ReferenceValue            float32
+	BinaryScaleFactor         common.Grib2NumericalValue
+	DecimalScaleFactor        common.Grib2NumericalValue
+	BitsPerValue              common.Grib2NumericalValue
+	TypeOfOriginalFieldValues common.Grib2CodeValue
 }
 
 func ReadTemplate5_0(data []byte) Template5_0 {
@@ -29,31 +29,31 @@ func ReadTemplate5_0(data []byte) Template5_0 {
 	_ = binary.Read(bytes.NewBuffer(data[9:]), binary.BigEndian, &o21)
 
 	return Template5_0{
-		Oct12: o12,
-		Oct16: common.ReadNumericalValue(o16),
-		Oct18: common.ReadNumericalValue(o18),
-		Oct20: common.ReadNumericalValue(o20),
-		Oct21: common.ReadFlagValue(o21, 5, 1),
+		ReferenceValue:            o12,
+		BinaryScaleFactor:         common.ReadSignedNumericalValue(o16),
+		DecimalScaleFactor:        common.ReadSignedNumericalValue(o18),
+		BitsPerValue:              common.ReadUnsignedNumericalValue(o20),
+		TypeOfOriginalFieldValues: common.ReadCodeValue(o21),
 	}
 }
 
 type Template5_2 struct {
-	Oct12 float32
-	Oct16 common.Grib2NumericalValue
-	Oct18 common.Grib2NumericalValue
-	Oct20 common.Grib2NumericalValue
-	Oct21 common.Grib2FlagValue
-	Oct22 common.Grib2FlagValue
-	Oct23 common.Grib2FlagValue
-	Oct24 common.Grib2NumericalValue
-	Oct28 common.Grib2NumericalValue
-	Oct32 common.Grib2NumericalValue
-	Oct36 common.Grib2NumericalValue
-	Oct37 common.Grib2NumericalValue
-	Oct38 common.Grib2NumericalValue
-	Oct42 common.Grib2NumericalValue
-	Oct43 common.Grib2NumericalValue
-	Oct47 common.Grib2NumericalValue
+	ReferenceValue                    float32
+	BinaryScaleFactor                 common.Grib2NumericalValue
+	DecimalScaleFactor                common.Grib2NumericalValue
+	BitsPerValue                      common.Grib2NumericalValue
+	TypeOfOriginalFieldValues         common.Grib2CodeValue
+	GroupSplittingMethodUsed          common.Grib2CodeValue
+	MissingValueManagementUsed        common.Grib2CodeValue
+	PrimaryMissingValueSubstitute     common.Grib2NumericalValue
+	SecondaryMissingValueSubstitute   common.Grib2NumericalValue
+	NumberOfGroupsOfDataValues        common.Grib2NumericalValue
+	ReferenceForGroupWidth            common.Grib2NumericalValue
+	NumberOfBitsUsedForTheGroupWidths common.Grib2NumericalValue
+	ReferenceForGroupLength           common.Grib2NumericalValue
+	LengthIncrementForTheGroupLengths common.Grib2NumericalValue
+	TrueLengthOfLastGroup             common.Grib2NumericalValue
+	NumberOfBitsForScaledGroupLengths common.Grib2NumericalValue
 }
 
 func ReadTemplate5_2(data []byte) Template5_2 {
@@ -85,44 +85,44 @@ func ReadTemplate5_2(data []byte) Template5_2 {
 	_ = binary.Read(bytes.NewBuffer(data[9:]), binary.BigEndian, &o47)
 
 	return Template5_2{
-		Oct12: o12,
-		Oct16: common.ReadNumericalValue(o16),
-		Oct18: common.ReadNumericalValue(o18),
-		Oct20: common.ReadNumericalValue(o20),
-		Oct21: common.ReadFlagValue(o21, 5, 1),
-		Oct22: common.ReadFlagValue(o22, 5, 4),
-		Oct23: common.ReadFlagValue(o23, 5, 5),
-		Oct24: common.ReadNumericalValue(o24),
-		Oct28: common.ReadNumericalValue(o28),
-		Oct32: common.ReadNumericalValue(o32),
-		Oct36: common.ReadNumericalValue(o36),
-		Oct37: common.ReadNumericalValue(o37),
-		Oct38: common.ReadNumericalValue(o38),
-		Oct42: common.ReadNumericalValue(o42),
-		Oct43: common.ReadNumericalValue(o43),
-		Oct47: common.ReadNumericalValue(o47),
+		ReferenceValue:                    o12,
+		BinaryScaleFactor:                 common.ReadSignedNumericalValue(o16),
+		DecimalScaleFactor:                common.ReadSignedNumericalValue(o18),
+		BitsPerValue:                      common.ReadUnsignedNumericalValue(o20),
+		TypeOfOriginalFieldValues:         common.ReadCodeValue(o21),
+		GroupSplittingMethodUsed:          common.ReadCodeValue(o22),
+		MissingValueManagementUsed:        common.ReadCodeValue(o23),
+		PrimaryMissingValueSubstitute:     common.ReadUnsignedNumericalValue(o24),
+		SecondaryMissingValueSubstitute:   common.ReadUnsignedNumericalValue(o28),
+		NumberOfGroupsOfDataValues:        common.ReadUnsignedNumericalValue(o32),
+		ReferenceForGroupWidth:            common.ReadUnsignedNumericalValue(o36),
+		NumberOfBitsUsedForTheGroupWidths: common.ReadUnsignedNumericalValue(o37),
+		ReferenceForGroupLength:           common.ReadUnsignedNumericalValue(o38),
+		LengthIncrementForTheGroupLengths: common.ReadUnsignedNumericalValue(o42),
+		TrueLengthOfLastGroup:             common.ReadUnsignedNumericalValue(o43),
+		NumberOfBitsForScaledGroupLengths: common.ReadUnsignedNumericalValue(o47),
 	}
 }
 
 type Template5_3 struct {
-	Oct12 float32
-	Oct16 common.Grib2NumericalValue
-	Oct18 common.Grib2NumericalValue
-	Oct20 common.Grib2NumericalValue
-	Oct21 common.Grib2FlagValue
-	Oct22 common.Grib2FlagValue
-	Oct23 common.Grib2FlagValue
-	Oct24 common.Grib2NumericalValue
-	Oct28 common.Grib2NumericalValue
-	Oct32 common.Grib2NumericalValue
-	Oct36 common.Grib2NumericalValue
-	Oct37 common.Grib2NumericalValue
-	Oct38 common.Grib2NumericalValue
-	Oct42 common.Grib2NumericalValue
-	Oct43 common.Grib2NumericalValue
-	Oct47 common.Grib2NumericalValue
-	Oct48 common.Grib2NumericalValue
-	Oct49 common.Grib2NumericalValue
+	ReferenceValue                    float32
+	BinaryScaleFactor                 common.Grib2NumericalValue
+	DecimalScaleFactor                common.Grib2NumericalValue
+	BitsPerValue                      common.Grib2NumericalValue
+	TypeOfOriginalFieldValues         common.Grib2CodeValue
+	GroupSplittingMethodUsed          common.Grib2CodeValue
+	MissingValueManagementUsed        common.Grib2CodeValue
+	PrimaryMissingValueSubstitute     common.Grib2NumericalValue
+	SecondaryMissingValueSubstitute   common.Grib2NumericalValue
+	NumberOfGroupsOfDataValues        common.Grib2NumericalValue
+	ReferenceForGroupWidth            common.Grib2NumericalValue
+	NumberOfBitsUsedForTheGroupWidths common.Grib2NumericalValue
+	ReferenceForGroupLength           common.Grib2NumericalValue
+	LengthIncrementForTheGroupLengths common.Grib2NumericalValue
+	TrueLengthOfLastGroup             common.Grib2NumericalValue
+	NumberOfBitsForScaledGroupLengths common.Grib2NumericalValue
+	OrderOfSpatialDifferencing        common.Grib2CodeValue
+	NumberOfOctetsExtraDescriptors    common.Grib2NumericalValue
 }
 
 func ReadTemplate5_3(data []byte) Template5_3 {
@@ -156,23 +156,23 @@ func ReadTemplate5_3(data []byte) Template5_3 {
 	_ = binary.Read(bytes.NewBuffer(data[9:]), binary.BigEndian, &o49)
 
 	return Template5_3{
-		Oct12: o12,
-		Oct16: common.ReadNumericalValue(o16),
-		Oct18: common.ReadNumericalValue(o18),
-		Oct20: common.ReadNumericalValue(o20),
-		Oct21: common.ReadFlagValue(o21, 5, 1),
-		Oct22: common.ReadFlagValue(o22, 5, 4),
-		Oct23: common.ReadFlagValue(o23, 5, 5),
-		Oct24: common.ReadNumericalValue(o24),
-		Oct28: common.ReadNumericalValue(o28),
-		Oct32: common.ReadNumericalValue(o32),
-		Oct36: common.ReadNumericalValue(o36),
-		Oct37: common.ReadNumericalValue(o37),
-		Oct38: common.ReadNumericalValue(o38),
-		Oct42: common.ReadNumericalValue(o42),
-		Oct43: common.ReadNumericalValue(o43),
-		Oct47: common.ReadNumericalValue(o47),
-		Oct48: common.ReadNumericalValue(o48),
-		Oct49: common.ReadNumericalValue(o49),
+		ReferenceValue:                    o12,
+		BinaryScaleFactor:                 common.ReadSignedNumericalValue(o16),
+		DecimalScaleFactor:                common.ReadSignedNumericalValue(o18),
+		BitsPerValue:                      common.ReadUnsignedNumericalValue(o20),
+		TypeOfOriginalFieldValues:         common.ReadCodeValue(o21),
+		GroupSplittingMethodUsed:          common.ReadCodeValue(o22),
+		MissingValueManagementUsed:        common.ReadCodeValue(o23),
+		PrimaryMissingValueSubstitute:     common.ReadUnsignedNumericalValue(o24),
+		SecondaryMissingValueSubstitute:   common.ReadUnsignedNumericalValue(o28),
+		NumberOfGroupsOfDataValues:        common.ReadUnsignedNumericalValue(o32),
+		ReferenceForGroupWidth:            common.ReadUnsignedNumericalValue(o36),
+		NumberOfBitsUsedForTheGroupWidths: common.ReadUnsignedNumericalValue(o37),
+		ReferenceForGroupLength:           common.ReadUnsignedNumericalValue(o38),
+		LengthIncrementForTheGroupLengths: common.ReadUnsignedNumericalValue(o42),
+		TrueLengthOfLastGroup:             common.ReadUnsignedNumericalValue(o43),
+		NumberOfBitsForScaledGroupLengths: common.ReadUnsignedNumericalValue(o47),
+		OrderOfSpatialDifferencing:        common.ReadCodeValue(o48),
+		NumberOfOctetsExtraDescriptors:    common.ReadUnsignedNumericalValue(o49),
 	}
 }

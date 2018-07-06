@@ -8,8 +8,8 @@ import (
 )
 
 type Section6 struct {
-	Oct6   common.Grib2FlagValue
-	Bitmap interface{}
+	BitmapIndicator common.Grib2CodeValue
+	Bitmap          interface{}
 }
 
 func ReadSection6(data []byte) Section6 {
@@ -18,6 +18,6 @@ func ReadSection6(data []byte) Section6 {
 	_ = binary.Read(bytes.NewBuffer(data[5:]), binary.BigEndian, &o6)
 
 	return Section6{
-		Oct6: common.ReadFlagValue(o6, 6, 0),
+		BitmapIndicator: common.ReadCodeValue(o6),
 	}
 }

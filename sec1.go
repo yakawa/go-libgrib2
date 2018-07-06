@@ -9,14 +9,14 @@ import (
 )
 
 type Section1 struct {
-	Oct6  uint16
-	Oct8  uint16
-	Oct10 common.Grib2FlagValue
-	Oct11 common.Grib2FlagValue
-	Oct12 common.Grib2FlagValue
-	Oct13 time.Time
-	Oct20 common.Grib2FlagValue
-	Oct21 common.Grib2FlagValue
+	Centre                          common.Grib2CodeValue
+	SubCentre                       common.Grib2NumericalValue
+	TablesVersion                   common.Grib2CodeValue
+	LocalTablesVersion              common.Grib2CodeValue
+	SignificanceOfReferenceTime     common.Grib2CodeValue
+	ReferenceTime                   time.Time
+	ProductionStatusOfProcessedData common.Grib2CodeValue
+	TypeOfProcessedData             common.Grib2CodeValue
 }
 
 func ReadSection1(data []byte) Section1 {
@@ -42,13 +42,13 @@ func ReadSection1(data []byte) Section1 {
 	loc, _ := time.LoadLocation("UTC")
 
 	return Section1{
-		Oct6:  o6,
-		Oct8:  o8,
-		Oct10: common.ReadFlagValue(o10, 1, 0),
-		Oct11: common.ReadFlagValue(o11, 1, 1),
-		Oct12: common.ReadFlagValue(o12, 1, 2),
-		Oct13: time.Date(int(year), time.Month(int(month)), int(day), int(hour), int(minutes), int(seconds), 0, loc),
-		Oct20: common.ReadFlagValue(o20, 1, 3),
-		Oct21: common.ReadFlagValue(o21, 1, 4),
+		Centre:                          common.ReadCodeValue(o6),
+		SubCentre:                       common.ReadUnsignedNumericalValue(o8),
+		TablesVersion:                   common.ReadCodeValue(o10),
+		LocalTablesVersion:              common.ReadCodeValue(o11),
+		SignificanceOfReferenceTime:     common.ReadCodeValue(o12),
+		ReferenceTime:                   time.Date(int(year), time.Month(int(month)), int(day), int(hour), int(minutes), int(seconds), 0, loc),
+		ProductionStatusOfProcessedData: common.ReadCodeValue(o20),
+		TypeOfProcessedData:             common.ReadCodeValue(o21),
 	}
 }

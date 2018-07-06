@@ -5,6 +5,11 @@ type Grib2NumericalValue struct {
 	Missing bool
 }
 
+type Grib2CodeValue struct {
+	Val     uint
+	Missing bool
+}
+
 type Grib2FlagValue struct {
 	Val     uint
 	Missing bool

@@ -43,7 +43,7 @@ func Read(data []byte) ([]Grib2, error) {
 		var sec5 Section5
 		var sec6 Section6
 
-		for pos < sec0.Oct9.Val {
+		for pos < sec0.TotalLength.Val {
 
 			secN, size, _ := readSectionHeader(data[pos : pos+5])
 			switch secN {

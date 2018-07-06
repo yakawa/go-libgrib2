@@ -9,9 +9,9 @@ import (
 
 // Section0
 type Section0 struct {
-	Oct7 common.Grib2FlagValue
-	Oct8 common.Grib2NumericalValue
-	Oct9 common.Grib2NumericalValue
+	Discipline    common.Grib2CodeValue
+	EditionNumber common.Grib2NumericalValue
+	TotalLength   common.Grib2NumericalValue
 }
 
 func ReadSection0(data []byte) Section0 {
@@ -24,8 +24,8 @@ func ReadSection0(data []byte) Section0 {
 	_ = binary.Read(bytes.NewBuffer(data[8:]), binary.BigEndian, &o9)
 
 	return Section0{
-		Oct7: common.ReadFlagValue(o7, 0, 0),
-		Oct8: common.ReadNumericalValue(o8),
-		Oct9: common.ReadNumericalValue(o9),
+		Discipline:    common.ReadCodeValue(o7),
+		EditionNumber: common.ReadUnsignedNumericalValue(o8),
+		TotalLength:   common.ReadUnsignedNumericalValue(o9),
 	}
 }
