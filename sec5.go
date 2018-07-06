@@ -26,6 +26,10 @@ func ReadSection5(data []byte) Section5 {
 	switch tn {
 	case uint16(0):
 		tmp = template.ReadTemplate5_0(data[11:])
+	case uint16(2):
+		tmp = template.ReadTemplate5_2(data[11:])
+	case uint16(3):
+		tmp = template.ReadTemplate5_3(data[11:])
 	case uint16(0xFFFF):
 		tmp = nil
 	default:
