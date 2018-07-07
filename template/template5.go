@@ -1,5 +1,8 @@
 package template
 
+/*
+ Template for Section5
+*/
 import (
 	"bytes"
 	"encoding/binary"
@@ -7,14 +10,16 @@ import (
 	"github.com/yakawa/go-libgrib2/common"
 )
 
+// Template5_0 : Grid point data - simple packing Note: For most templates, details of the packing process are described in regulation 92.9.4
 type Template5_0 struct {
-	ReferenceValue            float32
-	BinaryScaleFactor         common.Grib2NumericalValue
-	DecimalScaleFactor        common.Grib2NumericalValue
-	BitsPerValue              common.Grib2NumericalValue
-	TypeOfOriginalFieldValues common.Grib2CodeValue
+	ReferenceValue            float32                    // Reference value (R) (IEEE 32-bit floating-point value)
+	BinaryScaleFactor         common.Grib2NumericalValue // Binary scale factor (E)
+	DecimalScaleFactor        common.Grib2NumericalValue // Decimal scale factor (D)
+	BitsPerValue              common.Grib2NumericalValue // Number of bits used for each packed value for simple packing, or for each group reference value for complex packing or spatial differencing
+	TypeOfOriginalFieldValues common.Grib2CodeValue      // Type of original field values (see Code Table 5.1)
 }
 
+// ReadTemplate5_0 : Read Template 5.0
 func ReadTemplate5_0(data []byte) Template5_0 {
 	var o12 float32
 	var o16 uint16
@@ -37,25 +42,27 @@ func ReadTemplate5_0(data []byte) Template5_0 {
 	}
 }
 
+// Template5_2 : Grid point data - complex packing Note: For most templates, details of the packing process are described in regulation 92.9.4
 type Template5_2 struct {
-	ReferenceValue                    float32
-	BinaryScaleFactor                 common.Grib2NumericalValue
-	DecimalScaleFactor                common.Grib2NumericalValue
-	BitsPerValue                      common.Grib2NumericalValue
-	TypeOfOriginalFieldValues         common.Grib2CodeValue
-	GroupSplittingMethodUsed          common.Grib2CodeValue
-	MissingValueManagementUsed        common.Grib2CodeValue
-	PrimaryMissingValueSubstitute     common.Grib2NumericalValue
-	SecondaryMissingValueSubstitute   common.Grib2NumericalValue
-	NumberOfGroupsOfDataValues        common.Grib2NumericalValue
-	ReferenceForGroupWidth            common.Grib2NumericalValue
-	NumberOfBitsUsedForTheGroupWidths common.Grib2NumericalValue
-	ReferenceForGroupLength           common.Grib2NumericalValue
-	LengthIncrementForTheGroupLengths common.Grib2NumericalValue
-	TrueLengthOfLastGroup             common.Grib2NumericalValue
-	NumberOfBitsForScaledGroupLengths common.Grib2NumericalValue
+	ReferenceValue                    float32                    // Reference value (R) (IEEE 32-bit floating-point value)
+	BinaryScaleFactor                 common.Grib2NumericalValue // Binary scale factor (E)
+	DecimalScaleFactor                common.Grib2NumericalValue // Decimal scale factor (D)
+	BitsPerValue                      common.Grib2NumericalValue // Number of bits used for each packed value for simple packing, or for each group reference value for complex packing or spatial differencing
+	TypeOfOriginalFieldValues         common.Grib2CodeValue      // Type of original field values (see Code Table 5.1)
+	GroupSplittingMethodUsed          common.Grib2CodeValue      // Group splitting method used (see Code Table 5.4)
+	MissingValueManagementUsed        common.Grib2CodeValue      // Missing value management used (see Code Table 5.5)
+	PrimaryMissingValueSubstitute     common.Grib2NumericalValue // Primary missing value substitute
+	SecondaryMissingValueSubstitute   common.Grib2NumericalValue // Secondary missing value substitute
+	NumberOfGroupsOfDataValues        common.Grib2NumericalValue // NG - Number of groups of data values into which field is split
+	ReferenceForGroupWidth            common.Grib2NumericalValue // Reference for group widths (see Note 12)
+	NumberOfBitsUsedForTheGroupWidths common.Grib2NumericalValue // Number of bits used for the group widths (after the reference value in octet 36 has been removed)
+	ReferenceForGroupLength           common.Grib2NumericalValue // Reference for group lengths (see Note 13)
+	LengthIncrementForTheGroupLengths common.Grib2NumericalValue // Length increment for the group lengths (see Note 14)
+	TrueLengthOfLastGroup             common.Grib2NumericalValue // True length of last group
+	NumberOfBitsForScaledGroupLengths common.Grib2NumericalValue // Number of bits used for the scaled group lengths (after subtraction of the reference value given in octets 38-41 and division by the length increment given in octet 42)
 }
 
+// ReadTemplate5_2 : Read Template 5.2
 func ReadTemplate5_2(data []byte) Template5_2 {
 	var o12 float32
 	var o16, o18 uint16
@@ -104,27 +111,29 @@ func ReadTemplate5_2(data []byte) Template5_2 {
 	}
 }
 
+// Template5_3 : Grid point data - complex packing and spatial differencing Note: For most templates, details of the packing process are described in regulation 92.9.4
 type Template5_3 struct {
-	ReferenceValue                    float32
-	BinaryScaleFactor                 common.Grib2NumericalValue
-	DecimalScaleFactor                common.Grib2NumericalValue
-	BitsPerValue                      common.Grib2NumericalValue
-	TypeOfOriginalFieldValues         common.Grib2CodeValue
-	GroupSplittingMethodUsed          common.Grib2CodeValue
-	MissingValueManagementUsed        common.Grib2CodeValue
-	PrimaryMissingValueSubstitute     common.Grib2NumericalValue
-	SecondaryMissingValueSubstitute   common.Grib2NumericalValue
-	NumberOfGroupsOfDataValues        common.Grib2NumericalValue
-	ReferenceForGroupWidth            common.Grib2NumericalValue
-	NumberOfBitsUsedForTheGroupWidths common.Grib2NumericalValue
-	ReferenceForGroupLength           common.Grib2NumericalValue
-	LengthIncrementForTheGroupLengths common.Grib2NumericalValue
-	TrueLengthOfLastGroup             common.Grib2NumericalValue
-	NumberOfBitsForScaledGroupLengths common.Grib2NumericalValue
-	OrderOfSpatialDifferencing        common.Grib2CodeValue
-	NumberOfOctetsExtraDescriptors    common.Grib2NumericalValue
+	ReferenceValue                    float32                    // Reference value (R) (IEEE 32-bit floating-point value)
+	BinaryScaleFactor                 common.Grib2NumericalValue // Binary scale factor (E)
+	DecimalScaleFactor                common.Grib2NumericalValue // Decimal scale factor (D)
+	BitsPerValue                      common.Grib2NumericalValue // Number of bits used for each packed value for simple packing, or for each group reference value for complex packing or spatial differencing
+	TypeOfOriginalFieldValues         common.Grib2CodeValue      // Type of original field values (see Code Table 5.1)
+	GroupSplittingMethodUsed          common.Grib2CodeValue      // Group splitting method used (see Code Table 5.4)
+	MissingValueManagementUsed        common.Grib2CodeValue      // Missing value management used (see Code Table 5.5)
+	PrimaryMissingValueSubstitute     common.Grib2NumericalValue // Primary missing value substitute
+	SecondaryMissingValueSubstitute   common.Grib2NumericalValue // Secondary missing value substitute
+	NumberOfGroupsOfDataValues        common.Grib2NumericalValue // NG - Number of groups of data values into which field is split
+	ReferenceForGroupWidth            common.Grib2NumericalValue // Reference for group widths (see Note 12)
+	NumberOfBitsUsedForTheGroupWidths common.Grib2NumericalValue // Number of bits used for the group widths (after the reference value in octet 36 has been removed)
+	ReferenceForGroupLength           common.Grib2NumericalValue // Reference for group lengths (see Note 13)
+	LengthIncrementForTheGroupLengths common.Grib2NumericalValue // Length increment for the group lengths (see Note 14)
+	TrueLengthOfLastGroup             common.Grib2NumericalValue // True length of last group
+	NumberOfBitsForScaledGroupLengths common.Grib2NumericalValue // Number of bits used for the scaled group lengths (after subtraction of the reference value given in octets 38-41 and division by the length increment given in octet 42)
+	OrderOfSpatialDifferencing        common.Grib2CodeValue      // Order of spatial differencing (see Code Table 5.6)
+	NumberOfOctetsExtraDescriptors    common.Grib2NumericalValue // Number of octets required in the Data Section to specify extra descriptors needed for spatial differencing (octets 6-ww in Data Template 7.3)
 }
 
+// ReadTemplate5_3 : Read Template 5.3
 func ReadTemplate5_3(data []byte) Template5_3 {
 	var o12 float32
 	var o16, o18 uint16

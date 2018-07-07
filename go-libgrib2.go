@@ -1,3 +1,6 @@
+/*
+Package libgrib2 : GRIB2 Reader Library for Go-lang.
+*/
 package libgrib2
 
 import (
@@ -6,16 +9,18 @@ import (
 	"errors"
 )
 
+// Grib2 : All message for GRIB2.
 type Grib2 struct {
-	sec1 Section1
-	sec2 Section2
-	sec3 Section3
-	sec4 Section4
-	sec5 Section5
-	sec6 Section6
-	sec7 Section7
+	Sec1 Section1
+	Sec2 Section2
+	Sec3 Section3
+	Sec4 Section4
+	Sec5 Section5
+	Sec6 Section6
+	Sec7 Section7
 }
 
+// Read is function for reading grib2 file
 func Read(data []byte) ([]Grib2, error) {
 	var Grib2s []Grib2
 
@@ -34,7 +39,7 @@ func Read(data []byte) ([]Grib2, error) {
 			continue
 		}
 
-		sec0 := ReadSection0(data[pos : pos+16])
+		sec0 := readSection0(data[pos : pos+16])
 		pos += 16
 		var sec1 Section1
 		var sec2 Section2
@@ -48,27 +53,27 @@ func Read(data []byte) ([]Grib2, error) {
 			secN, size, _ := readSectionHeader(data[pos : pos+5])
 			switch secN {
 			case 1:
-				sec1 = ReadSection1(data[pos : pos+size])
+				sec1 = readSection1(data[pos : pos+size])
 			case 2:
-				ReadSection2(data[pos : pos+size])
+				sec2 = readSection2(data[pos : pos+size])
 			case 3:
-				sec3 = ReadSection3(data[pos : pos+size])
+				sec3 = readSection3(data[pos : pos+size])
 			case 4:
-				sec4 = ReadSection4(data[pos : pos+size])
+				sec4 = readSection4(data[pos : pos+size])
 			case 5:
-				sec5 = ReadSection5(data[pos : pos+size])
+				sec5 = readSection5(data[pos : pos+size])
 			case 6:
-				sec6 = ReadSection6(data[pos : pos+size])
+				sec6 = readSection6(data[pos : pos+size])
 			case 7:
-				sec7 := ReadSection7(data[pos:pos+size], sec5, sec6)
+				sec7 := readSection7(data[pos:pos+size], sec5, sec6)
 				grib2 := Grib2{
-					sec1: sec1,
-					sec2: sec2,
-					sec3: sec3,
-					sec4: sec4,
-					sec5: sec5,
-					sec6: sec6,
-					sec7: sec7,
+					Sec1: sec1,
+					Sec2: sec2,
+					Sec3: sec3,
+					Sec4: sec4,
+					Sec5: sec5,
+					Sec6: sec6,
+					Sec7: sec7,
 				}
 				Grib2s = append(Grib2s, grib2)
 			default:

@@ -1,5 +1,8 @@
 package libgrib2
 
+/*
+ Data Section
+*/
 import (
 	"fmt"
 	"log"
@@ -9,11 +12,12 @@ import (
 	"github.com/yakawa/go-libgrib2/template"
 )
 
+// Section7 : Data Section
 type Section7 struct {
 	Data []interface{}
 }
 
-func ReadSection7(data []byte, sec5 Section5, sec6 Section6) Section7 {
+func readSection7(data []byte, sec5 Section5, sec6 Section6) Section7 {
 	var val []interface{}
 	size := sec5.NumberOfValues.Val
 	switch sec5.DataRepresentationTemplateNumber.Val {

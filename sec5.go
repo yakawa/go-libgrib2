@@ -1,5 +1,8 @@
 package libgrib2
 
+/*
+ Data Representation Section
+*/
 import (
 	"bytes"
 	"encoding/binary"
@@ -9,13 +12,14 @@ import (
 	"github.com/yakawa/go-libgrib2/template"
 )
 
+// Section5 : Data Representation Section (PDS)
 type Section5 struct {
-	NumberOfValues                   common.Grib2NumericalValue
-	DataRepresentationTemplateNumber common.Grib2CodeValue
+	NumberOfValues                   common.Grib2NumericalValue // Number of data points where one or more values are specified in Section 7 when a bit map is present, total number of data points when a bit map is absent.
+	DataRepresentationTemplateNumber common.Grib2CodeValue      // Data Representation Template Number (see Code Table 5.0)
 	Template                         interface{}
 }
 
-func ReadSection5(data []byte) Section5 {
+func readSection5(data []byte) Section5 {
 	var o6 uint32
 	var tn uint16
 

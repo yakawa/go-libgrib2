@@ -1,5 +1,9 @@
 package libgrib2
 
+/*
+ Identification Section
+*/
+
 import (
 	"bytes"
 	"encoding/binary"
@@ -8,18 +12,19 @@ import (
 	"github.com/yakawa/go-libgrib2/common"
 )
 
+// Section1 : Identification Section
 type Section1 struct {
-	Centre                          common.Grib2CodeValue
-	SubCentre                       common.Grib2NumericalValue
-	TablesVersion                   common.Grib2CodeValue
-	LocalTablesVersion              common.Grib2CodeValue
-	SignificanceOfReferenceTime     common.Grib2CodeValue
-	ReferenceTime                   time.Time
-	ProductionStatusOfProcessedData common.Grib2CodeValue
-	TypeOfProcessedData             common.Grib2CodeValue
+	Centre                          common.Grib2CodeValue      // Identification of originating/generating centre (see Common Code Table C-11)
+	SubCentre                       common.Grib2NumericalValue // Identification of originating/generating sub-centre (allocated by originating/generating Centre)
+	TablesVersion                   common.Grib2CodeValue      // GRIB Master Tables Version Number (see Code Table 1.0 and Note 1)
+	LocalTablesVersion              common.Grib2CodeValue      // Version number of GRIB Local Tables used to augment Master Tables (see Code Table 1.1 and Note 2)
+	SignificanceOfReferenceTime     common.Grib2CodeValue      // Significance of Reference Time (see Code Table 1.2)
+	ReferenceTime                   time.Time                  // Reference time of data
+	ProductionStatusOfProcessedData common.Grib2CodeValue      // Production status of processed data in this GRIB message (see Code Table 1.3)
+	TypeOfProcessedData             common.Grib2CodeValue      // Type of processed data in this GRIB message (see Code Table 1.4)
 }
 
-func ReadSection1(data []byte) Section1 {
+func readSection1(data []byte) Section1 {
 	var o6, o8 uint16
 	var o10, o11 uint8
 	var year uint16

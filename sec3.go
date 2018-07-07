@@ -1,5 +1,9 @@
 package libgrib2
 
+/*
+ Grid Definition Section (GDS)
+*/
+
 import (
 	"bytes"
 	"encoding/binary"
@@ -9,16 +13,17 @@ import (
 	"github.com/yakawa/go-libgrib2/template"
 )
 
+// Section3 : Grid Definition Section (GDS)
 type Section3 struct {
-	SourceOfGridDefinition          common.Grib2CodeValue
-	NumberOfDataPoints              common.Grib2NumericalValue
-	NumberOfOctetsForNumberOfPoints common.Grib2NumericalValue
-	InterpretationOfNumberOfPoints  common.Grib2CodeValue
-	GridDefinitionTemplateNumber    common.Grib2CodeValue
+	SourceOfGridDefinition          common.Grib2CodeValue      // Source of grid definition (see Code Table 3.0 and Note 1)
+	NumberOfDataPoints              common.Grib2NumericalValue // Number of data points
+	NumberOfOctetsForNumberOfPoints common.Grib2NumericalValue // Number of octets for optional list of numbers (see Note 2)
+	InterpretationOfNumberOfPoints  common.Grib2CodeValue      // Interpretation of list of numbers (see Code Table 3.11)
+	GridDefinitionTemplateNumber    common.Grib2CodeValue      // Grid Definition Template Number (= N) (see Code Table 3.1)
 	Template                        interface{}
 }
 
-func ReadSection3(data []byte) Section3 {
+func readSection3(data []byte) Section3 {
 	var o6 uint8
 	var o7 uint32
 	var o11, o12 uint8

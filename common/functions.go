@@ -1,9 +1,13 @@
+/*
+Package common : common functions for libgrib2
+*/
 package common
 
 import (
 	"log"
 )
 
+// ReadUnsignedNumericalValue : Read Unsigned Value with Missing Value
 func ReadUnsignedNumericalValue(v interface{}) Grib2NumericalValue {
 	switch v.(type) {
 	case int:
@@ -34,6 +38,7 @@ func ReadUnsignedNumericalValue(v interface{}) Grib2NumericalValue {
 	}
 }
 
+// ReadSignedNumericalValue : Read Signed Value with Missing Value
 func ReadSignedNumericalValue(v interface{}) Grib2NumericalValue {
 	switch v.(type) {
 	case int:
@@ -76,6 +81,7 @@ func ReadSignedNumericalValue(v interface{}) Grib2NumericalValue {
 	}
 }
 
+// ReadCodeValue : Read Code Value
 func ReadCodeValue(v interface{}) Grib2CodeValue {
 	switch v.(type) {
 	case uint8:
@@ -104,6 +110,7 @@ func ReadCodeValue(v interface{}) Grib2CodeValue {
 	}
 }
 
+// ReadFlagValue : Read Flag Value
 func ReadFlagValue(v interface{}) Grib2FlagValue {
 	switch v.(type) {
 	case uint8:

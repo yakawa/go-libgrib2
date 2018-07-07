@@ -1,5 +1,8 @@
 package template
 
+/*
+ Template for Section4
+*/
 import (
 	"bytes"
 	"encoding/binary"
@@ -8,24 +11,26 @@ import (
 	"github.com/yakawa/go-libgrib2/common"
 )
 
+// Template4_0 : Analysis or forecast at a horizontal level or in a horizontal layer at a point in time
 type Template4_0 struct {
-	ParameterCategory               common.Grib2CodeValue
-	ParameterNumber                 common.Grib2CodeValue
-	TypeOfGeneratingProcess         common.Grib2CodeValue
-	BackgroundProcess               common.Grib2NumericalValue
-	GeneratingProcessIdentifier     common.Grib2NumericalValue
-	HoursAfterDataCutoff            common.Grib2NumericalValue
-	MinutesAfterDataCutoff          common.Grib2NumericalValue
-	IndicatorOfUnitOfTimeRange      common.Grib2CodeValue
-	ForecastTime                    common.Grib2NumericalValue
-	TypeOfFirstFixedSurface         common.Grib2CodeValue
-	ScaleFactorOfFirstFixedSurface  common.Grib2NumericalValue
-	ScaledValueOfFirstFixedSurface  common.Grib2NumericalValue
-	TypeOfSecondFixedSurface        common.Grib2CodeValue
-	ScaleFactorOfSecondFixedSurface common.Grib2NumericalValue
-	ScaledValueOfSecondFixedSurface common.Grib2NumericalValue
+	ParameterCategory               common.Grib2CodeValue      // Parameter category (see Code Table 4.1).
+	ParameterNumber                 common.Grib2CodeValue      // Parameter number (see Code Table 4.2).
+	TypeOfGeneratingProcess         common.Grib2CodeValue      // Type of generating process (see Code Table 4.3)
+	BackgroundProcess               common.Grib2NumericalValue // Background generating process identifier (defined by originating centre)
+	GeneratingProcessIdentifier     common.Grib2NumericalValue // Analysis or forecast generating processes identifier (defined by originating centre)
+	HoursAfterDataCutoff            common.Grib2NumericalValue // Hours of observational data cutoff after reference time (see Note 1)
+	MinutesAfterDataCutoff          common.Grib2NumericalValue // Minutes of observational data cutoff after reference time
+	IndicatorOfUnitOfTimeRange      common.Grib2CodeValue      // Indicator of unit of time range (see Code Table 4.4)
+	ForecastTime                    common.Grib2NumericalValue // Forecast time in units defined by octet 18
+	TypeOfFirstFixedSurface         common.Grib2CodeValue      // Type of first fixed surface (see Code Table 4.5)
+	ScaleFactorOfFirstFixedSurface  common.Grib2NumericalValue // Scale factor of first fixed surface
+	ScaledValueOfFirstFixedSurface  common.Grib2NumericalValue // Scaled value of first fixed surface
+	TypeOfSecondFixedSurface        common.Grib2CodeValue      // Type of second fixed surface (see Code Table 4.5)
+	ScaleFactorOfSecondFixedSurface common.Grib2NumericalValue // Scale factor of second fixed surface
+	ScaledValueOfSecondFixedSurface common.Grib2NumericalValue // Scaled value of second fixed surface
 }
 
+// ReadTemplate4_0 : Read Template 4.0
 func ReadTemplate4_0(data []byte) Template4_0 {
 	var o10, o11, o12, o13, o14 uint8
 	var o15 uint16
@@ -73,27 +78,29 @@ func ReadTemplate4_0(data []byte) Template4_0 {
 
 }
 
+// Template4_1 : Individual ensemble forecast, control and perturbed, at a horizontal level or in a horizontal layer at a point in time
 type Template4_1 struct {
-	ParameterCategory               common.Grib2CodeValue
-	ParameterNumber                 common.Grib2CodeValue
-	TypeOfGeneratingProcess         common.Grib2CodeValue
-	BackgroundProcess               common.Grib2NumericalValue
-	GeneratingProcessIdentifier     common.Grib2NumericalValue
-	HoursAfterDataCutoff            common.Grib2NumericalValue
-	MinutesAfterDataCutoff          common.Grib2NumericalValue
-	IndicatorOfUnitOfTimeRange      common.Grib2CodeValue
-	ForecastTime                    common.Grib2NumericalValue
-	TypeOfFirstFixedSurface         common.Grib2CodeValue
-	ScaleFactorOfFirstFixedSurface  common.Grib2NumericalValue
-	ScaledValueOfFirstFixedSurface  common.Grib2NumericalValue
-	TypeOfSecondFixedSurface        common.Grib2CodeValue
-	ScaleFactorOfSecondFixedSurface common.Grib2NumericalValue
-	ScaledValueOfSecondFixedSurface common.Grib2NumericalValue
-	TypeOfEnsembleForecast          common.Grib2CodeValue
-	PerturbationNumber              common.Grib2NumericalValue
-	NumberOfForecastsInEnsemble     common.Grib2NumericalValue
+	ParameterCategory               common.Grib2CodeValue      // Parameter category (see Code Table 4.1)
+	ParameterNumber                 common.Grib2CodeValue      // Parameter number (see Code Table 4.2)
+	TypeOfGeneratingProcess         common.Grib2CodeValue      // Type of generating process (see Code Table 4.3)
+	BackgroundProcess               common.Grib2NumericalValue // Background generating process identifier (defined by originating Centre)
+	GeneratingProcessIdentifier     common.Grib2NumericalValue // Forecast generating process identifier (defined by originating Centre)
+	HoursAfterDataCutoff            common.Grib2NumericalValue // Hours after reference time of data cutoff (see Note 1)
+	MinutesAfterDataCutoff          common.Grib2NumericalValue // Minutes after reference time of data cutoff
+	IndicatorOfUnitOfTimeRange      common.Grib2CodeValue      // Indicator of unit of time range (see Code Table 4.4)
+	ForecastTime                    common.Grib2NumericalValue // Forecast time in units defined by octet 18
+	TypeOfFirstFixedSurface         common.Grib2CodeValue      // Type of first fixed surface (see Code Table 4.5)
+	ScaleFactorOfFirstFixedSurface  common.Grib2NumericalValue // Scale factor of first fixed surface
+	ScaledValueOfFirstFixedSurface  common.Grib2NumericalValue // Scaled value of first fixed surface
+	TypeOfSecondFixedSurface        common.Grib2CodeValue      // Type of second fixed surface (see Code Table 4.5)
+	ScaleFactorOfSecondFixedSurface common.Grib2NumericalValue // Scale factor of second fixed surface
+	ScaledValueOfSecondFixedSurface common.Grib2NumericalValue // Scaled value of second fixed surface
+	TypeOfEnsembleForecast          common.Grib2CodeValue      // Type of ensemble forecast (see Code Table 4.6)
+	PerturbationNumber              common.Grib2NumericalValue // Perturbation number
+	NumberOfForecastsInEnsemble     common.Grib2NumericalValue // Number of forecasts in ensemble
 }
 
+// ReadTemplate4_1 : Read Template 4.1
 func ReadTemplate4_1(data []byte) Template4_1 {
 	var o10, o11, o12, o13, o14 uint8
 	var o15 uint16
@@ -148,33 +155,35 @@ func ReadTemplate4_1(data []byte) Template4_1 {
 
 }
 
+// Template4_8 : Average, accumulation, and/or extreme values or other statistically processed values at a horizontal level or in a horizontal layer in a continuous or non- continuous time interval
 type Template4_8 struct {
-	ParameterCategory                   common.Grib2CodeValue
-	ParameterNumber                     common.Grib2CodeValue
-	TypeOfGeneratingProcess             common.Grib2CodeValue
-	BackgroundProcess                   common.Grib2NumericalValue
-	GeneratingProcessIdentifier         common.Grib2NumericalValue
-	HoursAfterDataCutoff                common.Grib2NumericalValue
-	MinutesAfterDataCutoff              common.Grib2NumericalValue
-	IndicatorOfUnitOfTimeRange          common.Grib2CodeValue
-	ForecastTime                        common.Grib2NumericalValue
-	TypeOfFirstFixedSurface             common.Grib2CodeValue
-	ScaleFactorOfFirstFixedSurface      common.Grib2NumericalValue
-	ScaledValueOfFirstFixedSurface      common.Grib2NumericalValue
-	TypeOfSecondFixedSurface            common.Grib2CodeValue
-	ScaleFactorOfSecondFixedSurface     common.Grib2NumericalValue
-	ScaledValueOfSecondFixedSurface     common.Grib2NumericalValue
-	EndOfOverallTimeInterval            time.Time
-	NumberOfTimeRange                   common.Grib2NumericalValue
-	NumberOfMissingInStatisticalProcess common.Grib2NumericalValue
-	TypeOfStatisticalProcessing         common.Grib2CodeValue
-	TypeOfTimeIncrement                 common.Grib2CodeValue
-	IndicatorOfUnitForTimeRange         common.Grib2CodeValue
-	LengthOfTimeRange                   common.Grib2NumericalValue
-	IndicatorOfUnitForTimeIncrement     common.Grib2CodeValue
-	TimeIncrement                       common.Grib2NumericalValue
+	ParameterCategory                   common.Grib2CodeValue      // Parameter category (see Code Table 4.1)
+	ParameterNumber                     common.Grib2CodeValue      // Parameter number (see Code Table 4.2)
+	TypeOfGeneratingProcess             common.Grib2CodeValue      // Type of generating process (see Code Table 4.3)
+	BackgroundProcess                   common.Grib2NumericalValue // Background generating process identifier (defined by originating Centre)
+	GeneratingProcessIdentifier         common.Grib2NumericalValue // Analysis or Forecast generating process identifier (defined by originating Centre)
+	HoursAfterDataCutoff                common.Grib2NumericalValue // Hours after reference time of data cut-off (see Note 1)
+	MinutesAfterDataCutoff              common.Grib2NumericalValue // Minutes after reference time of data cut-off
+	IndicatorOfUnitOfTimeRange          common.Grib2CodeValue      // Indicator of unit of time range (see Code Table 4.4)
+	ForecastTime                        common.Grib2NumericalValue // Forecast time in units defined by octet 18 (see Note 2)
+	TypeOfFirstFixedSurface             common.Grib2CodeValue      // Type of first fixed surface (see Code Table 4.5)
+	ScaleFactorOfFirstFixedSurface      common.Grib2NumericalValue // Scale factor of first fixed surface
+	ScaledValueOfFirstFixedSurface      common.Grib2NumericalValue // Scaled value of first fixed surface
+	TypeOfSecondFixedSurface            common.Grib2CodeValue      // Type of second fixed surface (see Code Table 4.5)
+	ScaleFactorOfSecondFixedSurface     common.Grib2NumericalValue // Scale factor of second fixed surface
+	ScaledValueOfSecondFixedSurface     common.Grib2NumericalValue // Scaled value of second fixed surface
+	EndOfOverallTimeInterval            time.Time                  // Time of end of overall time interval
+	NumberOfTimeRange                   common.Grib2NumericalValue // n - Number of time range specifications describing the time intervals used to calculate the statistically processed field
+	NumberOfMissingInStatisticalProcess common.Grib2NumericalValue // Total number of data values missing in statistical process.
+	TypeOfStatisticalProcessing         common.Grib2CodeValue      // Statistical process used to calculate the processed field from the field at each time increment during the time range (see Code Table 4.10)
+	TypeOfTimeIncrement                 common.Grib2CodeValue      // Type of time increment between successive fields used in the statistical processing (see Code Table 4.11)
+	IndicatorOfUnitForTimeRange         common.Grib2CodeValue      // Indicator of unit of time for time range over which statistical processing is done (see Code Table 4.4)
+	LengthOfTimeRange                   common.Grib2NumericalValue // Length of the time range over which statistical processing is done, in units defined by the previous octet
+	IndicatorOfUnitForTimeIncrement     common.Grib2CodeValue      // Indicator of unit of time for the increment between the successive fields used (see Code Table 4.4)
+	TimeIncrement                       common.Grib2NumericalValue // Time increment between successive fields, in units defined by the previous octet (see Notes 3 and 4)
 }
 
+// ReadTemplate4_8 : Read Template 4.8
 func ReadTemplate4_8(data []byte) Template4_8 {
 	var o10, o11, o12, o13, o14 uint8
 	var o15 uint16
@@ -255,36 +264,38 @@ func ReadTemplate4_8(data []byte) Template4_8 {
 
 }
 
+// Template4_11 : Individual ensemble forecast, control and perturbed, at a horizontal level or in a horizontal layer in a continuous or non-continuous time interval
 type Template4_11 struct {
-	ParameterCategory                   common.Grib2CodeValue
-	ParameterNumber                     common.Grib2CodeValue
-	TypeOfGeneratingProcess             common.Grib2CodeValue
-	BackgroundProcess                   common.Grib2NumericalValue
-	GeneratingProcessIdentifier         common.Grib2NumericalValue
-	HoursAfterDataCutoff                common.Grib2NumericalValue
-	MinutesAfterDataCutoff              common.Grib2NumericalValue
-	IndicatorOfUnitOfTimeRange          common.Grib2CodeValue
-	ForecastTime                        common.Grib2NumericalValue
-	TypeOfFirstFixedSurface             common.Grib2CodeValue
-	ScaleFactorOfFirstFixedSurface      common.Grib2NumericalValue
-	ScaledValueOfFirstFixedSurface      common.Grib2NumericalValue
-	TypeOfSecondFixedSurface            common.Grib2CodeValue
-	ScaleFactorOfSecondFixedSurface     common.Grib2NumericalValue
-	ScaledValueOfSecondFixedSurface     common.Grib2NumericalValue
-	TypeOfEnsembleForecast              common.Grib2CodeValue
-	PerturbationNumber                  common.Grib2NumericalValue
-	NumberOfForecastsInEnsemble         common.Grib2NumericalValue
-	EndOfOverallTimeInterval            time.Time
-	NumberOfTimeRange                   common.Grib2NumericalValue
-	NumberOfMissingInStatisticalProcess common.Grib2NumericalValue
-	TypeOfStatisticalProcessing         common.Grib2CodeValue
-	TypeOfTimeIncrement                 common.Grib2CodeValue
-	IndicatorOfUnitForTimeRange         common.Grib2CodeValue
-	LengthOfTimeRange                   common.Grib2NumericalValue
-	IndicatorOfUnitForTimeIncrement     common.Grib2CodeValue
-	TimeIncrement                       common.Grib2NumericalValue
+	ParameterCategory                   common.Grib2CodeValue      // Parameter category (see Code table 4.1)
+	ParameterNumber                     common.Grib2CodeValue      // Parameter number (see Code table 4.2)
+	TypeOfGeneratingProcess             common.Grib2CodeValue      // Type of generating process (see Code table 4.3)
+	BackgroundProcess                   common.Grib2NumericalValue // Background generating process identifier (defined by originating centre)
+	GeneratingProcessIdentifier         common.Grib2NumericalValue // Forecast generating process identifier (defined by originating centre)
+	HoursAfterDataCutoff                common.Grib2NumericalValue // Hours after reference time of data cut-off (see Note 1)
+	MinutesAfterDataCutoff              common.Grib2NumericalValue // Minutes after reference time of data cut-off
+	IndicatorOfUnitOfTimeRange          common.Grib2CodeValue      // Indicator of unit of time range (see Code table 4.4)
+	ForecastTime                        common.Grib2NumericalValue // Forecast time in units defined by octet 18 (see Note 2)
+	TypeOfFirstFixedSurface             common.Grib2CodeValue      // Type of first fixed surface (see Code table 4.5)
+	ScaleFactorOfFirstFixedSurface      common.Grib2NumericalValue // Scale factor of first fixed surface
+	ScaledValueOfFirstFixedSurface      common.Grib2NumericalValue // Scaled value of first fixed surface
+	TypeOfSecondFixedSurface            common.Grib2CodeValue      // Type of second fixed surface (see Code table 4.5)
+	ScaleFactorOfSecondFixedSurface     common.Grib2NumericalValue // Scale factor of second fixed surface
+	ScaledValueOfSecondFixedSurface     common.Grib2NumericalValue // Scaled value of second fixed surface
+	TypeOfEnsembleForecast              common.Grib2CodeValue      // Type of ensemble forecast (see Code table 4.6)
+	PerturbationNumber                  common.Grib2NumericalValue // Perturbation number
+	NumberOfForecastsInEnsemble         common.Grib2NumericalValue // Number of forecasts in ensemble
+	EndOfOverallTimeInterval            time.Time                  // end of overall time interval
+	NumberOfTimeRange                   common.Grib2NumericalValue // n - number of time range specifications describing the time intervals used to calculate the statistically- processed field
+	NumberOfMissingInStatisticalProcess common.Grib2NumericalValue // Total number of data values missing in statistical process
+	TypeOfStatisticalProcessing         common.Grib2CodeValue      // Statistical process used to calculate the processed field from the field at each time increment during the time range (see Code table 4.10)
+	TypeOfTimeIncrement                 common.Grib2CodeValue      // Type of time increment between successive fields used in the statistical processing (see Code table 4.11)
+	IndicatorOfUnitForTimeRange         common.Grib2CodeValue      // Indicator of unit of time for time range over which statistical processing is done (see Code table 4.4)
+	LengthOfTimeRange                   common.Grib2NumericalValue // Length of the time range over which statistical processing is done, in units defined by the previous octet
+	IndicatorOfUnitForTimeIncrement     common.Grib2CodeValue      // Indicator of unit of time for the increment between the successive fields used (see Code table 4.4)
+	TimeIncrement                       common.Grib2NumericalValue // Time increment between successive fields, in units defined by the previous octet (see Note 3)
 }
 
+// ReadTemplate4_11 : Read Template 4.11
 func ReadTemplate4_11(data []byte) Template4_11 {
 	var o10, o11, o12, o13, o14 uint8
 	var o15 uint16

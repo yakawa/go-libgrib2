@@ -1,5 +1,9 @@
 package libgrib2
 
+/*
+ Product Definition Section (PDS)
+*/
+
 import (
 	"bytes"
 	"encoding/binary"
@@ -9,13 +13,14 @@ import (
 	"github.com/yakawa/go-libgrib2/template"
 )
 
+// Section4 : Product Definition Section (PDS)
 type Section4 struct {
-	NV                              common.Grib2NumericalValue
-	ProductDefinitionTemplateNumber common.Grib2CodeValue
+	NV                              common.Grib2NumericalValue // Number of coordinate values after template or number of information according to 3D vertical coordinate GRIB2 message
+	ProductDefinitionTemplateNumber common.Grib2CodeValue      // Product Definition Template Number (see Code Table 4.0)
 	Template                        interface{}
 }
 
-func ReadSection4(data []byte) Section4 {
+func readSection4(data []byte) Section4 {
 	var o6 uint16
 	var tn uint16
 

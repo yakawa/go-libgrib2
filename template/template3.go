@@ -1,5 +1,8 @@
 package template
 
+/*
+ Template for Section3
+*/
 import (
 	"bytes"
 	"encoding/binary"
@@ -7,28 +10,30 @@ import (
 	"github.com/yakawa/go-libgrib2/common"
 )
 
+// Template3_0 : Latitude/longitude (or equidistant cylindrical, or Plate Carree)
 type Template3_0 struct {
-	ShapeOfTheEarth                        common.Grib2CodeValue
-	ScaleFactorOfRadiusOfSphericalEarth    common.Grib2NumericalValue
-	ScaledValuedOfRadiusOfSphericalEarth   common.Grib2NumericalValue
-	ScaleFactorOfEarthMajorAxis            common.Grib2NumericalValue
-	ScaledValueOfEarthMajorAxis            common.Grib2NumericalValue
-	ScaleFactorOfEarthMinorAxis            common.Grib2NumericalValue
-	ScaledValueOfEarthMinorAxis            common.Grib2NumericalValue
-	Ni                                     common.Grib2NumericalValue
-	Nj                                     common.Grib2NumericalValue
-	BasicAngleOfTheInitialProductionDomain common.Grib2NumericalValue
-	SubdivisionsOfBasicAngle               common.Grib2NumericalValue
-	LatitudeOfFirstGridPoint               common.Grib2NumericalValue
-	LongitudeOfFirstGridPoint              common.Grib2NumericalValue
-	ResolutionAndComponentFlags            common.Grib2FlagValue
-	LatitudeOfLastGridPoint                common.Grib2NumericalValue
-	LongitudeOfLastGridPoint               common.Grib2NumericalValue
-	IDirectionIncrement                    common.Grib2NumericalValue
-	JDirectionIncrement                    common.Grib2NumericalValue
-	ScanningMode                           common.Grib2FlagValue
+	ShapeOfTheEarth                        common.Grib2CodeValue      // codetableShape of the earth (see Code Table 3.2)
+	ScaleFactorOfRadiusOfSphericalEarth    common.Grib2NumericalValue // Scale factor of radius of spherical earth
+	ScaledValuedOfRadiusOfSphericalEarth   common.Grib2NumericalValue // Scaled value of radius of spherical earth
+	ScaleFactorOfEarthMajorAxis            common.Grib2NumericalValue // Scale factor of major axis of oblate spheroid earth
+	ScaledValueOfEarthMajorAxis            common.Grib2NumericalValue // Scaled value of major axis of oblate spheroid earth
+	ScaleFactorOfEarthMinorAxis            common.Grib2NumericalValue // Scale factor of minor axis of oblate spheroid earth
+	ScaledValueOfEarthMinorAxis            common.Grib2NumericalValue // Scaled value of minor axis of oblate spheroid earth
+	Ni                                     common.Grib2NumericalValue // Ni - number of points along a parallel
+	Nj                                     common.Grib2NumericalValue // Nj - number of points along a meridian
+	BasicAngleOfTheInitialProductionDomain common.Grib2NumericalValue // Basic angle of the initial production domain (see Note 1)
+	SubdivisionsOfBasicAngle               common.Grib2NumericalValue // Subdivisions of basic angle used to define extreme longitudes and latitudes, and direction increments (see Note 1)
+	LatitudeOfFirstGridPoint               common.Grib2NumericalValue // La1 - latitude of first grid point (see Note 1)
+	LongitudeOfFirstGridPoint              common.Grib2NumericalValue // Lo1 - longitude of first grid point (see Note 1)
+	ResolutionAndComponentFlags            common.Grib2FlagValue      // Resolution and component flags (see Flag Table 3.3)
+	LatitudeOfLastGridPoint                common.Grib2NumericalValue // La2 - latitude of last grid point (see Note 1)
+	LongitudeOfLastGridPoint               common.Grib2NumericalValue // Lo2 - longitude of last grid point (see Note 1)
+	IDirectionIncrement                    common.Grib2NumericalValue // Di - i direction increment (see Notes 1 and 5)
+	JDirectionIncrement                    common.Grib2NumericalValue // Dj - j direction increment (see Notes 1 and 5)
+	ScanningMode                           common.Grib2FlagValue      // Scanning mode (flags - see Flag Table 3.4)
 }
 
+// ReadTemplate3_0 : Read Template 3.0
 func ReadTemplate3_0(data []byte) Template3_0 {
 	var o15, o16 uint8
 	var o17 uint32

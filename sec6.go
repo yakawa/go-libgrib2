@@ -1,5 +1,8 @@
 package libgrib2
 
+/*
+ Bitmap Section
+*/
 import (
 	"bytes"
 	"encoding/binary"
@@ -7,12 +10,13 @@ import (
 	"github.com/yakawa/go-libgrib2/common"
 )
 
+// Section6 : Bitmap Section
 type Section6 struct {
-	BitmapIndicator common.Grib2CodeValue
+	BitmapIndicator common.Grib2CodeValue // Bit-map indicator (see Code Table 6.0 and Note 1)
 	Bitmap          interface{}
 }
 
-func ReadSection6(data []byte) Section6 {
+func readSection6(data []byte) Section6 {
 	var o6 uint8
 
 	_ = binary.Read(bytes.NewBuffer(data[5:]), binary.BigEndian, &o6)

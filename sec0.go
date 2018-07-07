@@ -1,5 +1,9 @@
 package libgrib2
 
+/*
+ Indicator Section
+*/
+
 import (
 	"bytes"
 	"encoding/binary"
@@ -7,14 +11,14 @@ import (
 	"github.com/yakawa/go-libgrib2/common"
 )
 
-// Section0
+// Section0 : Indicator Section.
 type Section0 struct {
-	Discipline    common.Grib2CodeValue
-	EditionNumber common.Grib2NumericalValue
-	TotalLength   common.Grib2NumericalValue
+	Discipline    common.Grib2CodeValue      // GRIB Master Table Number (see Code Table 0.0)
+	EditionNumber common.Grib2NumericalValue // GRIB Edition Number
+	TotalLength   common.Grib2NumericalValue // Total length of GRIB message in octets (including Section 0)
 }
 
-func ReadSection0(data []byte) Section0 {
+func readSection0(data []byte) Section0 {
 	var o7 uint8
 	var o8 uint8
 	var o9 uint64
