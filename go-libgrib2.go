@@ -38,9 +38,10 @@ func Read(data []byte) ([]Grib2, error) {
 		if string(data[pos:pos+4]) != "GRIB" {
 			continue
 		}
-
+		gPos := 0
 		sec0 := readSection0(data[pos : pos+16])
-		pos += 16
+
+		gPos += 16
 		var sec1 Section1
 		var sec2 Section2
 		var sec3 Section3
@@ -48,24 +49,24 @@ func Read(data []byte) ([]Grib2, error) {
 		var sec5 Section5
 		var sec6 Section6
 
-		for pos < sec0.TotalLength.Val {
+		for gPos < sec0.TotalLength.Val {
 
-			secN, size, _ := readSectionHeader(data[pos : pos+5])
+			secN, size, _ := readSectionHeader(data[pos+gPos : pos+gPos+5])
 			switch secN {
 			case 1:
-				sec1 = readSection1(data[pos : pos+size])
+				sec1 = readSection1(data[pos+gPos : pos+gPos+size])
 			case 2:
-				sec2 = readSection2(data[pos : pos+size])
+				sec2 = readSection2(data[pos+gPos : pos+gPos+size])
 			case 3:
-				sec3 = readSection3(data[pos : pos+size])
+				sec3 = readSection3(data[pos+gPos : pos+gPos+size])
 			case 4:
-				sec4 = readSection4(data[pos : pos+size])
+				sec4 = readSection4(data[pos+gPos : pos+gPos+size])
 			case 5:
-				sec5 = readSection5(data[pos : pos+size])
+				sec5 = readSection5(data[pos+gPos : pos+gPos+size])
 			case 6:
-				sec6 = readSection6(data[pos : pos+size])
+				sec6 = readSection6(data[pos+gPos : pos+gPos+size])
 			case 7:
-				sec7 := readSection7(data[pos:pos+size], sec5, sec6)
+				sec7 := readSection7(data[pos+gPos:pos+gPos+size], sec5, sec6)
 				grib2 := Grib2{
 					Sec1: sec1,
 					Sec2: sec2,
@@ -81,8 +82,9 @@ func Read(data []byte) ([]Grib2, error) {
 					size = 4
 				}
 			}
-			pos += size
+			gPos += size
 		}
+		pos += sec0.TotalLength.Val
 
 	}
 	return Grib2s, nil

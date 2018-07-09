@@ -4,7 +4,6 @@ package libgrib2
  Data Section
 */
 import (
-	"fmt"
 	"log"
 	"math"
 
@@ -29,8 +28,6 @@ func readSection7(data []byte, sec5 Section5, sec6 Section6) Section7 {
 		val = decodeSimplePack(data[5:], size, R, E, D, nBits)
 	case 3:
 		val = decodeComplexAndSpatialDifferencing(data[5:], size, sec5.Template.(template.Template5_3))
-		fmt.Printf("Sec5: %+v\n", sec5)
-		fmt.Printf("Sec6: %+v\n", sec6)
 	default:
 		log.Fatalf("Cannot Decode Template 5.%d", sec5.DataRepresentationTemplateNumber.Val)
 	}
@@ -62,15 +59,16 @@ func decodeComplexAndSpatialDifferencing(data []byte, size int, tmp template.Tem
 	var hMin int64
 	ne := tmp.NumberOfOctetsExtraDescriptors.Val
 
-	if ne == 2 {
+	if sd == 1 {
 		g1 = readNUint(data[pos+0:], ne)
 		gMin = readNInt(data[pos+ne*1:], ne)
 		pos += 2 * ne
-	} else if ne == 3 {
+	} else if sd == 2 {
 		h1 = readNUint(data[pos+0:], ne)
 		h2 = readNUint(data[pos+ne*1:], ne)
 		hMin = readNInt(data[pos+ne*2:], ne)
 		pos += 3 * ne
+	} else {
 	}
 
 	ng := tmp.NumberOfGroupsOfDataValues.Val
@@ -131,6 +129,9 @@ func decodeComplexAndSpatialDifferencing(data []byte, size int, tmp template.Tem
 			d++
 		}
 	}
+	if d != size {
+		log.Fatalf("size mismatch expected %d but got %d\n", size, d)
+	}
 
 	var X2 []int64
 	d = 0
@@ -181,7 +182,6 @@ func decodeComplexAndSpatialDifferencing(data []byte, size int, tmp template.Tem
 		vals = append(vals, common.Grib2FloatValue{Val: float32(v), Missing: false})
 	}
 
-	fmt.Println(vals)
 	return vals
 }
 
