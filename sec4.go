@@ -39,6 +39,8 @@ func readSection4(data []byte) Section4 {
 		tmp = template.ReadTemplate4_8(data[9:])
 	case uint16(11):
 		tmp = template.ReadTemplate4_11(data[9:])
+	case uint16(12):
+		tmp = template.ReadTemplate4_12(data[9:])
 	case uint16(0xFFFF):
 		tmp = nil
 	default:
